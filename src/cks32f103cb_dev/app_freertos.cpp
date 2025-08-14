@@ -16,6 +16,31 @@
 
 static xTaskHandle s_xTaskMain;
 
+#ifdef _WDT_ENABLE_
+static void app_wdt_init(void);
+
+static void app_wdt_init(void)
+{
+    // WDTでリセットしたか確認
+    if (IWatchdog.isReset(true)) {
+        Serial.printf("System WDT Reseted!\r\n");
+    }
+
+    // WDT初期化
+    IWatchdog.begin(_WDT_OVF_TIME_MS_);
+
+    if (!IWatchdog.isEnabled()) {
+        while (1)
+        {
+            digitalWrite(OB_LED_PIN, HIGH);
+            delay(100);
+            digitalWrite(OB_LED_PIN, LOW);
+            delay(100);
+        }
+    }
+}
+#endif // _WDT_ENABLE_
+
 #ifdef BTN_USE
 // static xTaskHandle s_xTaskButton;
 // static uint8_t s_led_val = 1;
@@ -42,19 +67,21 @@ void vTaskButton(void *p_parameter)
 
 void vTaskMain(void *p_parameter)
 {
+#ifdef _WDT_ENABLE_
+    app_wdt_init();
+#endif
+
+    // アプリメイン初期化
     app_main_init();
 
     while (1)
     {
-        // TODO: メインタスク処理
-#if 0
-        Serial.printf("vTaskMain\n");
-        Serial.printf("Serial & LED Test(val = %d)\n", s_led_val);
-        digitalWrite(OB_LED_PIN, s_led_val);
-        s_led_val = !s_led_val;
-#else
         app_main();
-#endif
+
+#ifdef _WDT_ENABLE_
+        _WDT_CNT_RST();
+#endif // _WDT_ENABLE_
+
         vTaskDelay(3 / portTICK_PERIOD_MS);
     }
 }

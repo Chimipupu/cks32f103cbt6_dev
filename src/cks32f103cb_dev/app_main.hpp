@@ -30,6 +30,14 @@
 #define REG_BIT_TGL(reg, bit)               ((reg) ^=  (1UL << (bit))) // レジスタのビットをトグル
 #define REG_BIT_CHK(reg, bit)               ((reg) &   (1UL << (bit))) // レジスタのビットチェック
 
+// [WDT関連]
+#define _WDT_ENABLE_                                // WDT有効マクロ
+
+#ifdef _WDT_ENABLE_
+#define _WDT_OVF_TIME_MS_           10000000        // WDTが鳴く時間 @10秒
+#include <IWatchdog.h>
+#endif // _WDT_ENABLE_
+
 // NOP
 __attribute__( ( always_inline ) ) static inline void _NOP(void)
 {
@@ -46,6 +54,17 @@ __attribute__( ( always_inline ) ) static inline void _DI(void)
 __attribute__( ( always_inline ) ) static inline void _EI(void)
 {
     __asm__ __volatile__("cpsie i");
+}
+
+// WDTをなでるマクロ
+__attribute__( ( always_inline ) ) static inline void _WDT_CNT_RST(void)
+{
+#ifdef _WDT_ENABLE_
+    // WDTのcntを0にしてなでる
+    IWatchdog.reload();
+#else
+    _NOP;
+#endif // _WDT_ENABLE_
 }
 
 void show_mem_dump(uint32_t dump_addr, uint32_t dump_size);
