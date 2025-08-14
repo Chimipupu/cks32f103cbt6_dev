@@ -16,8 +16,10 @@ void setup(void)
 {
     // GPIO 初期化
     pinMode(OB_LED_PIN, OUTPUT);
+#ifdef BTN_USE
     pinMode(BUTTON_PIN, INPUT_PULLUP);
     attachInterrupt(BUTTON_PIN, buttonISR, CHANGE);
+#endif // BTN_USE
 
     // Serial(USB-CDC) 初期化
     Serial.begin(115200);
