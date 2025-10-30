@@ -9,10 +9,7 @@
  * 
  */
 #include "app_main.hpp"
-
-#ifdef USE_DBG_COM
 #include "dbg_com.hpp"
-#endif // USE_DBG_COM
 
 /**
  * @brief メモリダンプ(16進HEX & Ascii)

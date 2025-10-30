@@ -11,6 +11,8 @@
 #include "dbg_com.hpp"
 #include "ansi_esc.hpp"
 
+#ifdef USE_DBG_COM
+
 // コマンド履歴
 static char s_cmd_history[CMD_HISTORY_MAX][DBG_CMD_MAX_LEN];
 static uint8_t s_history_count = 0;  // コマンド履歴の数
@@ -367,3 +369,4 @@ void dbg_com_main(void)
         insert_char_at_cursor(c);
     }
 }
+#endif // USE_DBG_COM

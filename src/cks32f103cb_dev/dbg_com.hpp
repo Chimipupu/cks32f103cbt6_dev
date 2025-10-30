@@ -21,7 +21,12 @@
 
 #include "app_main.hpp"
 
-// #define DEBUG_DBG_COM      // デバッグ用
+// (DEBUG)デバッグモニタの使用有無マクロ
+// #define USE_DBG_COM
+
+#ifdef USE_DBG_COM
+// (DEBUG)dbg_com自体のデバッグ
+// #define DEBUG_DBG_COM
 
 // コマンド関連のマクロ
 #define DBG_CMD_MAX_LEN         32 // コマンドの最大長
@@ -115,5 +120,6 @@ typedef struct {
 
 void dbg_com_init(void);
 void dbg_com_main(void);
+#endif // USE_DBG_COM
 
 #endif // DBG_COM_H

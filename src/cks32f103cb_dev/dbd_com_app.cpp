@@ -10,6 +10,8 @@
  */
 
 #include "dbg_com.hpp"
+
+#ifdef USE_DBG_COM
 #include "ansi_esc.hpp"
 #include "CMSIS_DSP.h"
 
@@ -181,3 +183,4 @@ static void cmd_arm_math(dbg_cmd_args_t *p_args)
         Serial.printf("Test SUCCESS\r\n");
     }
 }
+#endif // USE_DBG_COM

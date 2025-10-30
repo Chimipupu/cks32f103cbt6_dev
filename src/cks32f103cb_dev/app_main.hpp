@@ -16,9 +16,6 @@
 #include <stdarg.h>
 #include <math.h>
 
-// (DEBUG)デバッグモニタ
-// #define USE_DBG_COM
-
 // レジスタを8/16/32bitでR/Wするマクロ
 #define REG_READ_BYTE(base, offset)         (*(volatile uint8_t  *)((base) + (offset)))
 #define REG_READ_WORD(base, offset)         (*(volatile uint16_t *)((base) + (offset)))
