@@ -120,7 +120,13 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+#if 1
+    // Lチカ（GPIOをトグル）
+    LL_GPIO_TogglePin(OB_LED_PIN_GPIO_Port, OB_LED_PIN_Pin);
+    LL_mDelay(1000);
+#else
     app_main();
+#endif
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
