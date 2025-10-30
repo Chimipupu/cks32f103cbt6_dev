@@ -17,12 +17,10 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include <Arduino.h>
-
-#include "app_main.hpp"
+#include "app_main.h"
 
 // (DEBUG)デバッグモニタの使用有無マクロ
-#define USE_DBG_COM
+// #define USE_DBG_COM
 
 #ifdef USE_DBG_COM
 // (DEBUG)dbg_com自体のデバッグ
