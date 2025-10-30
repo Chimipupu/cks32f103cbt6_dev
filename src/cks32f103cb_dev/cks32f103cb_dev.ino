@@ -12,14 +12,20 @@
 #include "mcu_board.hpp"
 #include "app_freertos.hpp"
 
-void setup(void)
+static void gpio_init(void)
 {
-    // GPIO 初期化
     pinMode(OB_LED_PIN, OUTPUT);
+    digitalWrite(OB_LED_PIN, LOW);
 #ifdef BTN_USE
     pinMode(BUTTON_PIN, INPUT_PULLUP);
     attachInterrupt(BUTTON_PIN, buttonISR, CHANGE);
 #endif // BTN_USE
+}
+
+void setup(void)
+{
+    // GPIO 初期化
+    gpio_init();
 
     // Serial(USB-CDC) 初期化
     Serial.begin(115200);

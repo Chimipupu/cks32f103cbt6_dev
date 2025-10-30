@@ -9,7 +9,10 @@
  * 
  */
 #include "app_main.hpp"
+
+#ifdef USE_DBG_COM
 #include "dbg_com.hpp"
+#endif // USE_DBG_COM
 
 /**
  * @brief メモリダンプ(16進HEX & Ascii)
@@ -68,53 +71,6 @@ void show_mem_dump(uint32_t dump_addr, uint32_t dump_size)
 }
 
 /**
- * @brief i2Cスレーブデバイスのスキャン関数
- * 
- * @param port I2Cポート番号 (0 or 1)
- */
-void i2c_slave_scan(uint8_t port)
-{
-#if 0
-    int32_t ret = 0xFF;
-    uint8_t addr, dummy = 0x00;
-    uint8_t slave_count = 0;
-    uint8_t slave_addr_buf[128] = {0};
-
-    memset(&slave_addr_buf[0], 0x00, sizeof(slave_addr_buf));
-    i2c_inst_t *i2c_port = (port == 0) ? I2C_0_PORT : I2C_1_PORT;
-
-    // 7bitのI2Cスレーブアドレス(0x00～0x7F)をスキャン
-    Serial.printf("Scanning I2C%d bus...\n", port);
-    Serial.printf("       0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F\n");
-    for (addr = 0; addr <= 0x7F; addr++)
-    {
-        if ((addr & 0x0F) == 0) {
-            Serial.printf("0x%02X: ", addr & 0xF0);
-        }
-
-        ret = i2c_write_blocking(i2c_port, addr, &dummy, 1, false);
-        if (ret >= 0) {
-            Serial.printf(" * ");
-            slave_addr_buf[slave_count] = addr;
-            slave_count++;
-        } else {
-            Serial.printf(" - ");
-        }
-
-        if ((addr & 0x0F) == 0x0F) {
-            Serial.printf("\n");
-        }
-    }
-
-    Serial.printf("\nI2C Scan complete! (Slave:%d", slave_count);
-    for (uint8_t i = 0; i < slave_count; i++) {
-        Serial.printf(", 0x%02X", slave_addr_buf[i]);
-    }
-    Serial.printf(")\n");
-#endif
-}
-
-/**
  * @brief 関数の実行時間を計測する
  * 
  * @param func 計測対象の関数ポインタ
@@ -123,16 +79,9 @@ void i2c_slave_scan(uint8_t port)
  */
 void proc_exec_time(void (*func)(void), const char* func_name, ...)
 {
-    _DI();
     volatile uint32_t start_time = micros();
-    _EI();
-
     func();
-
-    _DI();
     volatile uint32_t end_time = micros();
-    _EI();
-
     Serial.printf("proc time %s: %u us\n", func_name, end_time - start_time);
 }
 
@@ -142,8 +91,10 @@ void proc_exec_time(void (*func)(void), const char* func_name, ...)
  */
 void app_main_init(void)
 {
+#ifdef USE_DBG_COM
     // デバッグモニタ 初期化
     dbg_com_init();
+#endif // USE_DBG_COM
 }
 
 /**
@@ -152,6 +103,8 @@ void app_main_init(void)
  */
 void app_main(void)
 {
-    // デバッグモニタ メイン
+#ifdef USE_DBG_COM
+    // (DEBUG)デバッグモニタ メイン
     dbg_com_main();
+#endif // USE_DBG_COM
 }

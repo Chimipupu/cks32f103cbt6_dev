@@ -16,6 +16,9 @@
 #include <stdarg.h>
 #include <math.h>
 
+// (DEBUG)デバッグモニタ
+// #define USE_DBG_COM
+
 // レジスタを8/16/32bitでR/Wするマクロ
 #define REG_READ_BYTE(base, offset)         (*(volatile uint8_t  *)((base) + (offset)))
 #define REG_READ_WORD(base, offset)         (*(volatile uint16_t *)((base) + (offset)))
@@ -68,7 +71,6 @@ __attribute__( ( always_inline ) ) static inline void _WDT_CNT_RST(void)
 }
 
 void show_mem_dump(uint32_t dump_addr, uint32_t dump_size);
-void i2c_slave_scan(uint8_t i2c_port);
 void proc_exec_time(void (*p_func)(void), const char* p_func_name, ...);
 void app_main_init(void);
 void app_main(void);
