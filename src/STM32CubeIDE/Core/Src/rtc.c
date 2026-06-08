@@ -33,6 +33,7 @@ void MX_RTC_Init(void)
   /* USER CODE END RTC_Init 0 */
 
   LL_RTC_InitTypeDef RTC_InitStruct = {0};
+  LL_RTC_TimeTypeDef RTC_TimeStruct = {0};
 
     LL_PWR_EnableBkUpAccess();
     /* Enable BKP CLK enable for backup registers */
@@ -49,6 +50,13 @@ void MX_RTC_Init(void)
   RTC_InitStruct.AsynchPrescaler = 0xFFFFFFFFU;
   LL_RTC_Init(RTC, &RTC_InitStruct);
   LL_RTC_SetAsynchPrescaler(RTC, 0xFFFFFFFFU);
+
+  /** Initialize RTC and set the Time and Date
+  */
+  RTC_TimeStruct.Hours = 0;
+  RTC_TimeStruct.Minutes = 0;
+  RTC_TimeStruct.Seconds = 0;
+  LL_RTC_TIME_Init(RTC, LL_RTC_FORMAT_BCD, &RTC_TimeStruct);
   /* USER CODE BEGIN RTC_Init 2 */
 
   /* USER CODE END RTC_Init 2 */
@@ -58,3 +66,4 @@ void MX_RTC_Init(void)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
+

@@ -28,7 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <app_main.h>
+#include "app_main.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -112,7 +112,9 @@ int main(void)
   MX_SPI2_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+
   app_main_init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,14 +122,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-#if 1
-    // Lチカ（GPIOをトグル）
-    LL_GPIO_TogglePin(OB_LED_PIN_GPIO_Port, OB_LED_PIN_Pin);
-    LL_mDelay(1000);
-#else
-    app_main();
-#endif
+
     /* USER CODE BEGIN 3 */
+    app_main();
   }
   /* USER CODE END 3 */
 }

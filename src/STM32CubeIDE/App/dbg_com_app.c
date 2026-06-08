@@ -1,12 +1,10 @@
 /**
- * @file dbd_com_app.c
+ * @file dbg_com_app.c
  * @author Chimipupu(https://github.com/Chimipupu)
  * @brief デバッグモニタのアプリ
  * @version 0.1
- * @date 2025-08-02
- * 
- * @copyright Copyright (c) 2025 Chimipupu All Rights Reserved.
- * 
+ * @date 2026-06-08
+ * @copyright Copyright (c) 2026 Chimipupu All Rights Reserved.
  */
 
 #include "dbg_com.h"

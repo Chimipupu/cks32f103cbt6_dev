@@ -17,25 +17,24 @@
 #include <math.h>
 
 // レジスタを8/16/32bitでR/Wするマクロ
-#define REG_READ_BYTE(base, offset)         (*(volatile uint8_t  *)((base) + (offset)))
-#define REG_READ_WORD(base, offset)         (*(volatile uint16_t *)((base) + (offset)))
-#define REG_READ_DWORD(base, offset)        (*(volatile uint32_t *)((base) + (offset)))
-#define REG_WRITE_BYTE(base, offset, val)   (*(volatile uint8_t  *)((base) + (offset)) = (val))
-#define REG_WRITE_WORD(base, offset, val)   (*(volatile uint16_t *)((base) + (offset)) = (val))
-#define REG_WRITE_DWORD(base, offset, val)  (*(volatile uint32_t *)((base) + (offset)) = (val))
+#define REG_READ_BYTE(base, offset)           (*(volatile uint8_t  *)((base) + (offset)))
+#define REG_READ_WORD(base, offset)           (*(volatile uint16_t *)((base) + (offset)))
+#define REG_READ_DWORD(base, offset)          (*(volatile uint32_t *)((base) + (offset)))
+#define REG_WRITE_BYTE(base, offset, val)     (*(volatile uint8_t  *)((base) + (offset)) = (val))
+#define REG_WRITE_WORD(base, offset, val)     (*(volatile uint16_t *)((base) + (offset)) = (val))
+#define REG_WRITE_DWORD(base, offset, val)    (*(volatile uint32_t *)((base) + (offset)) = (val))
 
 // レジスタビット操作
-#define REG_BIT_SET(reg, bit)               ((reg) |=  (1UL << (bit))) // レジスタのビットをセット
-#define REG_BIT_CLR(reg, bit)               ((reg) &= ~(1UL << (bit))) // レジスタのビットをクリア
-#define REG_BIT_TGL(reg, bit)               ((reg) ^=  (1UL << (bit))) // レジスタのビットをトグル
-#define REG_BIT_CHK(reg, bit)               ((reg) &   (1UL << (bit))) // レジスタのビットチェック
+#define REG_BIT_SET(reg, bit)                 ((reg) |=  (1UL << (bit))) // レジスタのビットをセット
+#define REG_BIT_CLR(reg, bit)                 ((reg) &= ~(1UL << (bit))) // レジスタのビットをクリア
+#define REG_BIT_TGL(reg, bit)                 ((reg) ^=  (1UL << (bit))) // レジスタのビットをトグル
+#define REG_BIT_CHK(reg, bit)                 ((reg) &   (1UL << (bit))) // レジスタのビットチェック
 
 // [WDT関連]
 #define _WDT_ENABLE_                                // WDT有効マクロ
 
 #ifdef _WDT_ENABLE_
 #define _WDT_OVF_TIME_MS_           10000000        // WDTが鳴く時間 @10秒
-#include <IWatchdog.h>
 #endif // _WDT_ENABLE_
 
 // NOP
@@ -61,14 +60,12 @@ __attribute__( ( always_inline ) ) static inline void _WDT_CNT_RST(void)
 {
 #ifdef _WDT_ENABLE_
     // WDTのcntを0にしてなでる
-    IWatchdog.reload();
+    // TODO
 #else
     _NOP;
 #endif // _WDT_ENABLE_
 }
 
-void show_mem_dump(uint32_t dump_addr, uint32_t dump_size);
-void proc_exec_time(void (*p_func)(void), const char* p_func_name, ...);
 void app_main_init(void);
 void app_main(void);
 

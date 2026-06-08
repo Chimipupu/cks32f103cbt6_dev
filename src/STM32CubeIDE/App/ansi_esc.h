@@ -3,11 +3,10 @@
  * @author Chimipupu(https://github.com/Chimipupu)
  * @brief ANSI ESC
  * @version 0.1
- * @date 2025-07-31
- * 
- * @copyright Copyright (c) 2025 Chimipupu All Rights Reserved.
- * 
+ * @date 2026-06-08
+ * @copyright Copyright (c) 2026 Chimipupu All Rights Reserved.
  */
+
 #ifndef ANSI_ESC_H
 #define ANSI_ESC_H
 

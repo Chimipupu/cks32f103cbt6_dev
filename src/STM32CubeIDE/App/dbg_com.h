@@ -3,11 +3,10 @@
  * @author Chimipupu(https://github.com/Chimipupu)
  * @brief デバッグモニタのヘッダ
  * @version 0.1
- * @date 2025-06-13
- * 
- * @copyright Copyright (c) 2025 Chimipupu All Rights Reserved.
- * 
+ * @date 2026-06-08
+ * @copyright Copyright (c) 2026 Chimipupu All Rights Reserved.
  */
+
 #ifndef DBG_COM_H
 #define DBG_COM_H
 
@@ -17,12 +16,10 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include <Arduino.h>
-
-#include "app_main.hpp"
+#include "app_main.h"
 
 // (DEBUG)デバッグモニタの使用有無マクロ
-#define USE_DBG_COM
+// #define USE_DBG_COM
 
 #ifdef USE_DBG_COM
 // (DEBUG)dbg_com自体のデバッグ

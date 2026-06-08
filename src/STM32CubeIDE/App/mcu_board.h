@@ -3,10 +3,8 @@
  * @author Chimipupu(https://github.com/Chimipupu)
  * @brief 基板ヘッダー
  * @version 0.1
- * @date 2025-08-14
- * 
- * @copyright Copyright (c) 2025 Chimipupu All Rights Reserved.
- * 
+ * @date 2026-06-08
+ * @copyright Copyright (c) 2026 Chimipupu All Rights Reserved.
  */
 
 #ifndef MCU_BOARD_h

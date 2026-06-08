@@ -132,3 +132,4 @@ void MX_I2C2_Init(void)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
+
